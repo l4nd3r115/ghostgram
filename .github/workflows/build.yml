@@ -38,6 +38,16 @@ jobs:
 
           shasum -a 256 /tmp/bazel
 
+      - name: Check provisioning profiles
+        run: |
+            for f in build-system/fake-codesigning/profiles/*.mobileprovision; do
+              echo "===== $f ====="
+              security cms -D -i "$f" > /tmp/profile.plist
+              /usr/libexec/PlistBuddy -c "Print :Name" /tmp/profile.plist
+              /usr/libexec/PlistBuddy -c "Print :ExpirationDate" /tmp/profile.plist
+              /usr/libexec/PlistBuddy -c "Print :Entitlements:application-identifier" /tmp/profile.plist
+            done
+
       - name: Build the App
         run: |
           set -x
