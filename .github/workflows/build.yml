@@ -28,6 +28,16 @@ jobs:
           cp -R $GITHUB_WORKSPACE /Users/Shared/
           mv /Users/Shared/$(basename $GITHUB_WORKSPACE) /Users/Shared/telegram-ios
 
+      - name: Verify Bazel download
+        run: |
+          set -x
+
+          curl -L \
+            "https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-darwin-arm64" \
+            -o /tmp/bazel
+
+          shasum -a 256 /tmp/bazel
+
       - name: Build the App
         run: |
           set -x
