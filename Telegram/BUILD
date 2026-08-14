@@ -1762,7 +1762,7 @@ ios_application(
             ":NotificationServiceExtension" + notificationServiceExtensionVersion,
             ":IntentsExtension",
             ":WidgetExtension",
-            ":BroadcastUploadExtension",
+            # ":BroadcastUploadExtension",
         ],
     }),
     deps = [
